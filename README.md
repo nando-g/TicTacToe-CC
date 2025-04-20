@@ -3,7 +3,6 @@ In this project we are working to develop a simple Tic-Tac-Toe game application 
 1. **AWS EC2 Instance**: This is where the application will run. We're using an Amazon Linux 2 EC2 instance to host the application.
 2. **AWS DynamoDB**: This is used as the backend database to store game state and user data. DynamoDB is a NoSQL database service provided by AWS, which is fully managed and designed for high-performance applications.
 3. **Python Application**: The application is written in Python, using Flask for the web framework and Boto for interacting with DynamoDB.
-4. **IAM Role**: IAM role for secure connection between ec2 to dynamoDB.
 
 ### Project Structure and Components
 
@@ -39,105 +38,12 @@ In this project we are working to develop a simple Tic-Tac-Toe game application 
 5. **Game State Management**:
    - The game state, including player moves and game status, is stored and managed in DynamoDB.
    - The `GameController` class handles all interactions with DynamoDB to ensure the game state is consistently updated and retrieved.
-
-
-# Installation Steps
-
-### Install Development Tools and Dependencies
-
-Installs essential development tools and libraries needed for compiling and building software.
+  
+6. **User Authentication**:
+   - We first signup/login to enter the game.
 
 
 ```bash
-sudo yum groupinstall -y "Development Tools"
+python application.py --config config.ini --mode service --endpoint dynamodb.ap-south-1.amazonaws.com --serverPort 5000
 ```
 
-Installs development headers and libraries for OpenSSL, bzip2, and libffi, required for Python.
-
-
-```bash
-sudo yum install -y openssl-devel bzip2-devel libffi-devel
-```
-
-
-### Install Python 2.7.18
-
-Downloads Python 2.7.18, extracts it, configures the build with optimizations enabled, and installs it without replacing the system-provided Python.
-
-
-```bash
-cd /usr/src
-sudo wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz
-sudo tar xzf Python-2.7.18.tgz
-cd Python-2.7.18
-sudo ./configure --enable-optimizations
-sudo make altinstall
-```
-
-Verifies the installed Python version.
-
-
-```bash
-python2.7 -V
-```
-
-### Install pip for Python 2.7
-
-Downloads and installs pip for Python 2.7.
-
-
-```bash
-wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
-python get-pip.py
-```
-
-### Install Python Packages
-
-Installs Flask, Boto (for AWS SDK), and configparser Python packages using pip.
-
-
-```bash
-pip install Flask
-pip install boto
-pip install configparser
-```
-
-### Install Git
-
-Installs Git, a version control system.
-
-```bash
-yum install git -y
-```
-
-### Clone the TicTacToe Project Repository
-
-Clones the TicTacToe project repository from GitHub into the `/home/ec2-user/` directory.
-
-```bash
-cd /home/ec2-user/
-git clone https://github.com/avizway1/tictactoe-with-DynamoDB.git
-```
-
-Create a file inside the code location provide file name as "config.ini" and add below entry. make sure to change the region accordingly.
-
-[Settings]
-TableName = Games
-Region = ap-south-2
-
-Also, edit the config file and edit the config file and set region and endpoint based on your resources. Example mentioned below
-
-[dynamodb]
-region=ap-south-2
-endpoint=dynamodb.ap-south-2.amazonaws.com
-
-Also, Dont forget to attach an IAM role, that has valid access to create a DynamoDB table. Also, While launching EC2 instance, Enable "metadata" to "V1 and v2" instead of only V2, as we are using metadata URL to obtain the temp credentials.
-
-Once all content is ready, Navigate to the project location and run below command. 
-#make sure to open required port (5000) in ec2 security group
-
-```bash
-python application.py --config config.ini --mode service --endpoint dynamodb.ap-south-2.amazonaws.com --serverPort 5000
-```
-
-Then Open browser and enter **http://instance-public-ip:5000/** and enter to access the application.
