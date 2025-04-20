@@ -14,7 +14,7 @@
         </div>
         
         <div style="padding-top: 10px;">
-            <form class="test" action="/play" method="post">
+            <form class="test" action="{{ url_for('play') }}" method="post">
                 <div class="form-group">
                     <label for="invitee">Choose an Opponent:</label>
                     <input type="text" id="invitee" name="invitee" placeholder="e.g. John" class="form-control customizedInput">

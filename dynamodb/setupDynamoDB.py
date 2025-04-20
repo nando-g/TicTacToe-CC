@@ -71,4 +71,4 @@ if __name__ == "__main__":
     users_table = createUsersTable(db_conn)
     
     print("DynamoDB setup completed successfully!")
-    print("Active Tables:", [table.table_name for table in db_conn.list_tables()['TableNames']])
+    print("Active Tables:", db_conn.list_tables()['TableNames'])

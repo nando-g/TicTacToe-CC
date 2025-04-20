@@ -1,6 +1,151 @@
-<form method="POST">
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <button type="submit">Sign Up</button>
-  </form>
-  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TicTacToe - Sign Up</title>
+    <!-- Use the same fonts as login.html -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Itim&family=Julius+Sans+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            position: relative;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Itim', cursive, 'Julius Sans One', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            overflow-x: hidden;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            z-index: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.12;
+            pointer-events: none;
+            background-image: url('data:image/svg+xml;utf8,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><text x="5" y="40" font-size="40" font-family="Julius Sans One, Arial" fill="%233aafa9">X</text><text x="30" y="40" font-size="40" font-family="Julius Sans One, Arial" fill="%232d3142">O</text></svg>');
+            background-repeat: repeat;
+            background-size: 60px 60px;
+        }
+        .tictactoe-title {
+            margin-top: 40px;
+            font-size: 6rem;
+            font-family: 'Bebas Neue', 'Julius Sans One', 'Itim', cursive, sans-serif;
+            letter-spacing: 4px;
+            color: #2d3142;
+            text-shadow: 2px 2px 6px #bfc9d1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #3aafa9 0%, #2d3142 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            z-index: 1;
+        }
+        .signup-container {
+            margin-top: 40px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.14);
+            padding: 40px 32px 32px 32px;
+            width: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background: #e0eafc;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .avatar img {
+            width: 60px;
+            height: 60px;
+        }
+        .signup-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .signup-form input[type="text"],
+        .signup-form input[type="password"] {
+            font-family: 'Itim', cursive, sans-serif;
+            padding: 12px 14px;
+            margin-bottom: 18px;
+            border: 1px solid #bfc9d1;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            background: #f7fafc;
+            transition: border-color 0.2s;
+        }
+        .signup-form input:focus {
+            border-color: #3aafa9;
+            outline: none;
+        }
+        .signup-form button {
+            font-family: 'Julius Sans One', 'Itim', cursive, sans-serif;
+            background: linear-gradient(90deg, #3aafa9 0%, #2d3142 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 0;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            margin-bottom: 10px;
+        }
+        .signup-form button:hover {
+            background: linear-gradient(90deg, #2d3142 0%, #3aafa9 100%);
+            transform: translateY(-2px) scale(1.03);
+        }
+        .login-link {
+            margin-top: 14px;
+            font-size: 1rem;
+            color: #3aafa9;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .login-link:hover {
+            color: #2d3142;
+            text-decoration: underline;
+        }
+        @media (max-width: 500px) {
+            .signup-container {
+                width: 95vw;
+                padding: 24px 8px 20px 8px;
+            }
+            .tictactoe-title {
+                font-size: 2.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tictactoe-title">
+        <span><span style="font-weight:900; letter-spacing:10px;">TicTacToe</span></span>
+    </div>
+    <div class="signup-container">
+        <div class="avatar">
+            <img src="https://img.icons8.com/color/96/000000/add-user-group-man-man--v1.png" alt="User Avatar">
+        </div>
+        <form class="signup-form" method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <a class="login-link" href="{{ url_for('login') }}">Already have an account? Login</a>
+    </div>
+</body>
+</html>
+

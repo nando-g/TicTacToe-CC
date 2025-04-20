@@ -1,7 +1,6 @@
 {% extends "board.html" %}
 {% block addon %}
-<script lang="text/javascript">
-    // Your existing JavaScript code remains unchanged
+<script type="text/javascript">
     var gameRaw = '{{ gameJson|safe }}';
     var game = JSON.parse(gameRaw);
     var gameString = JSON.stringify(game);
@@ -16,7 +15,7 @@
         window.clearInterval(interval);
         xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = isChanged;
-        xmlHttp.open('GET', '/gameData=' + gameId, true);
+        xmlHttp.open('GET', '/gameData={{ gameId }}', true);
         xmlHttp.send(null);
     }
     function isChanged() {
@@ -94,7 +93,7 @@
     </div>
     {% if status == 'FINISHED' %}
     <div class="play-again">
-        <form action="/play" method="post">
+        <form action="{{ url_for('play') }}" method="post">
             <input type="hidden" name="invitee" value="{{ opponent }}">
             <button type="submit" class="btn btn-primary btn-play-again">Play Again!</button>
         </form>
@@ -102,3 +101,4 @@
     {% endif %}
 </div>
 {% endblock %}
+
